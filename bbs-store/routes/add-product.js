@@ -20,8 +20,10 @@ router.post('',(req,res)=>{
          const imageUrl = req.body.imageUrl;
          const Category = req.body.Category;
          const seller_id = req.session.userid
+         const quant = req.body.quant;
+         console.log(quant);
 
-         const product = new Product(productName, imageUrl, description, Category, seller_id, price);
+         const product = new Product(productName, imageUrl, description, Category,quant, seller_id, price);
          product.save()
          .then(result => {
                  res.redirect("/");

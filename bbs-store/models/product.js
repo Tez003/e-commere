@@ -2,20 +2,21 @@ const db = require('../middleware/database');
 
 
 module.exports = class Product {
-  constructor( name, imageUrl, description,tag,seller_id, price) {
+  constructor( name, imageUrl, description,tag,quant,seller_id, price) {
     
     this.p_name = name;
     this.imageUrl = imageUrl;
     this.description = description;
     this.category = tag;
+    this.quant = quant;
     this.seller_id = seller_id;
     this.price = price;
   }
 
   save() {
     return db.execute(
-      'INSERT INTO products (p_name, image_url, descript, category, seller_id, price) VALUES (?, ?, ?, ?, ?, ?)',
-      [this.p_name, this.imageUrl,this.description, this.category , this.seller_id ,this.price   ]
+      'INSERT INTO products (p_name, image_url, descript, category, seller_id, price, quant) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [this.p_name, this.imageUrl,this.description, this.category , this.seller_id ,this.price, this.quant   ]
     );
   }
 
