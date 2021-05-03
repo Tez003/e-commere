@@ -1,0 +1,131 @@
+Table: orders
+Columns:
+o_id int AI PK 
+user_id int 
+p_id int 
+quantity int 
+total int 
+Buy varchar(1) 
+o_complete varchar(1)
+
+
+
+Table: products
+Columns:
+p_id int AI PK 
+p_name varchar(50) 
+image_url varchar(1000) 
+descript varchar(1000) 
+category varchar(100) 
+seller_id varchar(30) 
+price double 
+quant int
+
+
+Table: shipping
+Columns:
+s_id int AI PK 
+user_id int 
+h_add varchar(300) 
+city varchar(30) 
+state varchar(30) 
+country varchar(30) 
+pincode varchar(6) 
+s_date varchar(30) 
+o_id int
+
+
+Table: user_details
+Columns:
+user_id int AI PK 
+name varchar(30) 
+username varchar(30) 
+mail_id varchar(50) 
+mob_no double 
+pass varchar(30) 
+admin varchar(1)
+
+
+
+Views
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `cart` AS
+    SELECT 
+        `orders`.`user_id` AS `user_id`,
+        `orders`.`o_id` AS `o_id`,
+         `products`.`p_id` AS `p_id`,
+        `products`.`p_name` AS `p_name`,
+        `products`.`image_url` AS `image_url`,
+        `products`.`descript` AS `descript`,
+        `products`.`category` AS `category`,
+        `products`.`price` AS `price`,
+        `orders`.`quantity` AS `quantity`,
+        `orders`.`total` AS `total`
+    FROM
+        (`orders`
+        JOIN `products`)
+    WHERE
+        ((`orders`.`Buy` = 'n')
+            AND (`orders`.`p_id` = `products`.`p_id`))
+
+
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `placedorders` AS
+    SELECT 
+        `orders`.`user_id` AS `user_id`,
+        `orders`.`o_id` AS `o_id`,
+        `products`.`p_name` AS `p_name`,
+        `products`.`image_url` AS `image_url`,
+        `products`.`descript` AS `descript`,
+        `products`.`category` AS `category`,
+        `products`.`price` AS `price`,
+        `orders`.`quantity` AS `quantity`,
+        `orders`.`total` AS `total`,
+        `orders`.`o_complete` AS `o_complete`
+    FROM
+        (`orders`
+        JOIN `products`)
+    WHERE
+        ((`orders`.`Buy` = 'y')
+            AND (`orders`.`p_id` = `products`.`p_id`))
+
+
+
+
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `shipping_details` AS
+    SELECT 
+        `orders`.`o_id` AS `o_id`,
+        `products`.`seller_id` AS `seller_id`,
+        `products`.`p_name` AS `p_name`,
+        `products`.`image_url` AS `image_url`,
+        `products`.`descript` AS `descript`,
+        `products`.`category` AS `category`,
+        `products`.`price` AS `price`,
+        `orders`.`quantity` AS `quantity`,
+        `orders`.`total` AS `total`,
+        `shipping`.`h_add` AS `h_add`,
+        `shipping`.`city` AS `city`,
+        `shipping`.`pincode` AS `pincode`
+    FROM
+        ((`orders`
+        JOIN `products`)
+        JOIN `shipping`)
+    WHERE
+        ((`orders`.`Buy` = 'y')
+            AND (`orders`.`o_complete` = 'n')
+            AND (`orders`.`p_id` = `products`.`p_id`)
+            AND (`orders`.`o_id` = `shipping`.`o_id`))
+
+            

@@ -1,0 +1,60 @@
+<html>
+    <%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+
+        <div class="container my-4">
+        <div class="jumbotron">
+
+            <div>
+                <h1 class="display-4 my-2" style="text-align: center;">Add Product</h1>
+              </div>
+            <form action="/addproduct" method="POST">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputpname">Product Name</label>
+                    <input type="text" class="form-control" name="productName" id="inputpame" placeholder="Product Name">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPrice">Price</label>
+                    <input type="number" class="form-control" name="Price" id="inputPrice" placeholder="Price">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputDescrip">Description</label>
+                  <input type="text" class="form-control" name="Descp" id="inputDescrip" placeholder="This Procust is">
+                </div>
+<!--
+                <div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+-->
+
+                <div class="form-group">
+                  <label for="inputimageUrl">Image Url</label>
+                  <input type="text" class="form-control" name="imageUrl" id="inputimageUrl" placeholder="Image Url">
+                </div>      
+                <div class="form-row align-items-center">
+                    <div class="col-auto my-1">
+                      <label class="mr-sm-2" for="inlineFormCustomSelect">Categories</label>
+                      <select class="custom-select mr-sm-2" name = "Category" id="inlineFormCustomSelect">
+                        <option selected>Category</option>
+                        <option value="Cycles">Cycles</option>
+                        <option value="Books">Books</option>
+                        <option value="Electricals">Electricals</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Essentials">Essentials</option>
+                      </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Add Product</button>
+              </form>
+            </div>
+        </div>
+    </body>
+</html>

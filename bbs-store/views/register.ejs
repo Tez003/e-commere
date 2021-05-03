@@ -1,0 +1,58 @@
+<html>
+    <%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+
+        <div class="container my-2">
+
+          <div class="jumbotron" style="margin-top: 60px;">
+            <div>
+              <h1 class="display-4 " style="text-align: center;">BBS-Store</h1>
+            </div>
+            <div>
+              <h1 class="display-4 my-2" style="text-align: center;">Create Account</h1>
+            </div>
+            <form action="/register" method="POST">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <input type="text" class="form-control" name="fname" id="fname" placeholder="Name">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <input type="email" class="form-control" name="Email" id="Email" placeholder="Email">
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <input type="text" class="form-control" name="Username" id="Username" placeholder="Username">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <input type="number" class="form-control" name="Phno" id="Phno" placeholder="Mobile Number">
+                    </div>
+                    
+                  </div>
+
+                
+                
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <input type="password" class="form-control" name ="Password" id="Password" placeholder="Password">
+                  </div>
+
+                  <div class="form-group col-md-6">
+                   
+                    <input type="password" class="form-control" nmae="conPassword" id="conPassword" placeholder="Confirm Password">
+                  </div>
+                  
+                </div>
+               
+                <div style="text-align: center;">
+                  <button type="submit" class="btn btn-info mx-auto" >Create Your <span>BBS-Store</span> Account</button>
+                </div>
+                
+              </form>
+
+            </div>
+        </div>
+    </body>
+</html>

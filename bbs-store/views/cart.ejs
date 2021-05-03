@@ -1,0 +1,81 @@
+<html>
+	<%- include('./partials/head.ejs') %>
+
+	<body>
+		<%- include('./partials/nav.ejs') %>
+		<div class="container">
+			<div class="row m-4 ">
+				<a href="/" class="col-3 btn btn-info" style="color: rgb(255, 253, 253);">Back to Shopping</a>
+				
+			</div>
+			<h3 class="display-4" style="text-align: center;">Cart</h3>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="box-element">
+					<table class="table">
+						<thead class="thead-dark">
+						  <tr>
+							<th scope="col">Image</th>
+							<th scope="col">Product Name</th>
+							<th scope="col">Price</th>
+							<th scope="col">Quantity</th>
+							<th scope="col">Total</th>
+							<th scope="col"></th>
+						  </tr>
+						</thead>
+						
+					<% var Final = 0%>
+					<% for (let cart of carts){ %>
+						<tbody>
+							<tr>
+							  <th scope="row"><img src="<%=cart.image_url%>" style="width: 130px; height: 130; object-fit: cover;"></th>
+							  <td><%=cart.p_name%></td>
+							  <td><%=cart.price%></td>
+							  <td><%=cart.quantity%></td>
+							  <td><%=cart.total%></td>
+							  <td>
+								<form action="/cart/del" method="post">
+                                    
+                                      <div class="form-group col-md-4">
+                                        <button type="submit"  data-action="add" class="btn btn-outline-secondary add-btn update-cart">Delete Item</button> 
+                                    <input type="hidden" name="productId" value="<%= cart.p_id %>">
+                                      </div>
+                                    
+                                </form>
+							  </td>
+							</tr>
+						</tbody>
+						
+						<% Final = Final + cart.total %>
+						<% } %>
+						<th scope="row"></th>
+							  <td><strong>Total</strong></td>
+							  <td></td>
+							  <td></td>
+							  <td><%=Final%></td>
+	
+					</table>
+					
+				
+	
+				</div>
+	
+				
+			</div>
+			
+				
+		</div>
+		<div class="m-2">
+			<a href="/checkout" class="col-3 btn btn-info" style="color: rgb(255, 253, 253);">Checkout</a>
+		
+		</div>
+	
+		</div>
+
+
+		<%- include('./partials/footer.ejs') %>
+	</body>
+
+</html>
+
+	

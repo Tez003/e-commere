@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<%- include('./partials/head.ejs') %>
+
+	<body>
+		<%- include('./partials/nav.ejs') %>
+		
+			
+	<div class="container">
+	<div class="row">
+	<% for (let product of products){ %>
+		
+		<div class="col-lg-4">
+			<img class="thumbnail" style="image-orientation: inherit; object-fit: cover;" src="<%=product.image_url%>" alt = "image here">
+			<div class="box-element product">
+				<h6><strong> <%= product.p_name%> </strong></h6>
+				<hr>
+
+				<% if(!sess.isLoggedIn){ %> 
+					<a class="btn btn-outline-success" href="/login">View</a>
+				   <% } else{ %>
+					<a class="btn btn-outline-success" href="/<%= product.p_id%>">View</a>
+          <% } %>
+				
+				
+				<h4 style="display: inline-block;float: right;"><strong>Rs.<%= product.price %></strong></h4>
+
+			</div>
+		</div>
+		<% } %>
+	</div>
+	</div>
+	<%- include('./partials/footer.ejs') %>
+	</body>
+</html>

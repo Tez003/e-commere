@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">BBS Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+       
+        <%  if (sess.isLoggedIn){ %>
+          <li class="nav-item ">
+            <a class="nav-link" href="profile"> My Account <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/addproduct">Add Product <span class="sr-only"></span></a>
+          </li>
+        <% } %> 
+
+        <%  if (sess.admin == '1'){ %>
+          <li class="nav-item ">
+            <a class="nav-link" href="/admin"> Admin Panel <span class="sr-only"></span></a>
+          </li>
+          
+        <% } %> 
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0" style="margin-right: 20px;" action="/" method="POST" >
+        <label class="mr-sm-2" for="inlineFormCustomSelect">Categories</label>
+        <select class="custom-select mr-sm-2" name = "Category" id="inlineFormCustomSelect">
+          <option selected>Search</option>
+          <option value="Cycles">Cycles</option>
+          <option value="Books">Books</option>
+          <option value="Electricals">Electricals</option>
+          <option value="Sports">Sports</option>
+          <option value="Essentials">Essentials</option>
+        </select>
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search by Tag</button>
+      </form>
+      <div class="form-inline my-2 my-lg-0">
+          <% if(!sess.isLoggedIn){ %> 
+           <a href="login"class="btn btn-warning"style="margin-right:10px;">Login</a>
+           <a href="register"class="btn btn-warning">Sign Up</a>
+          <% } else{ %> 
+            <a class="btn btn-warning"style="margin-right:10px;"> Hi, <%= sess.user %> </a>
+           <a href="logout"class="btn btn-warning">Logout</a>
+
+          <% } %> 
+           <a href="cart">
+              <img  id="cart-icon" src="/images/cart.png">
+          </a>
+          
+
+      </div>
+    </div>
+  </nav>

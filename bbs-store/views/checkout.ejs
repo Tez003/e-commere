@@ -1,0 +1,99 @@
+
+
+<html>
+	<%- include('./partials/head.ejs') %>
+
+	<body>
+		
+		<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="box-element" id="form-wrapper">
+					<form id="form">
+						<div id="user-info">
+							<div class="form-group">
+								<label for="Username">Username</label>
+								<input required disabled id="Username" class="form-control" type="text" name="name" value="<%=sess.name %>">
+							</div>
+							<div class="form-group">
+								<label for="Email">Email Id</label>
+								<input required disabled id="Email" class="form-control" type="email" name="email" value="<%=sess.email %>">
+							</div>
+						</div>
+					</form>
+					<form id="form" action="/checkout" method="POST" >
+						
+						<div id="shipping-info">
+							<hr>
+							<p>Shipping Information:</p>
+							<hr>
+							<div class="form-field">
+								<input class="form-control" type="text" name="address" placeholder="Address..">
+							</div>
+							<div class="form-field">
+								<input class="form-control" type="text" name="city" placeholder="City..">
+							</div>
+							<div class="form-field">
+								<input class="form-control" type="text" name="state" placeholder="State..">
+							</div>
+							<div class="form-field">
+								<input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+							</div>
+							<div class="form-field">
+								<input class="form-control" type="text" name="country" placeholder="country..">
+							</div>
+						</div>
+	
+						<hr>
+						<input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
+					</form>
+				</div>
+	
+				<br>
+				<div class="box-element hidden" id="payment-info">
+					<small>Paypal Options</small>
+					<!--<button id="make-payment">Make payment</button>-->
+					<div id="paypal-button-container"></div>
+				</div>
+				
+			</div>
+	
+			<div class="col-lg-6">
+				<div class="box-element">
+					<a  class="btn btn-outline-dark" href="cart">&#x2190; Back to Cart</a>
+					<hr>
+					<h3>Order Summary</h3>
+					<hr>
+					<% var Final = 0%>
+					<% var totalQuant = 0%>
+					<% for (let cart of carts){ %>
+					<div class="cart-row">
+						<div style="flex:2"><img class="row-image" src="<%=cart.image_url%>"></div>
+						<div style="flex:2"><p><%=cart.p_name%></p></div>
+						<div style="flex:1"><p>₹ <%=cart.price%></p></div>
+						<div style="flex:1"><p><%=cart.quantity%></p></div>
+						<div style="flex:1"><p><%=cart.total%></p></div>
+					</div>
+					<% Final = Final + cart.total %>
+					<% totalQuant = totalQuant + cart.quantity%>
+					<% } %>
+					<div class="cart-row">
+						<div style="flex: 3;"><h5><strong>Items  : </strong> </h5></div>
+						<div style="flex: 1;"><h5><strong><%= totalQuant %></strong> </h5></div>
+					</div>
+					<div class="cart-row">
+						<div style="flex: 3;"><h5><strong>Total  : </strong> </h5></div>
+						<div style="flex: 1;"><h5><strong><%= Final %></strong> </h5></div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		</div>
+		
+		<%- include('./partials/footer.ejs') %>
+	
+	</body>
+</html>
+
+    

@@ -1,0 +1,48 @@
+<html>
+    <%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+
+        <% for (let product of products){ %>
+		<div class="cotainer">
+            <div class="jumbotron">
+                <div class="card mb-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <img class="card-img-top" style="width: 100%; height: auto; object-fit: cover;" src="<%=product.image_url%>" alt="Card image cap">
+                        </div>
+                        <div class="col-6">
+                            <div class="card-body">
+                                <h5 class="display-4"><strong><%= product.p_name%></strong></h5>
+                                <h5><%= product.descript%></h5>
+                                <h4><%= product.category%></h4>
+                                <h3>Price:  ₹ <%= product.price%>/-(Including GST)</h3>
+                                <p>Free Door delivery</p>
+
+                                
+                                <form action="/cart/add" method="post">
+                                    <div class="form-group col-md-4">
+                                        <label>Quantity</label>
+                                        <input type="number" class="form-control" name="quantity" id="quantity" placeholder="Quantity">
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                        <button type="submit" data-product="<%= product.id %>" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button> 
+                                    <input type="hidden" name="productId" value="<%= product.p_id %>">
+                                      </div>
+                                    
+                                </form>
+                              </div>
+                        </div>
+                    </div>
+                    
+                   
+                  </div>
+                  
+            </div>
+        </div>
+          
+            <% } %>
+
+    </body>
+</html>

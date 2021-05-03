@@ -1,0 +1,205 @@
+<html>
+    <%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+        
+        
+
+          <div class="container jumbotron">
+            <div>
+                <h2><u>Profile</u></h2>
+              </div>
+
+            <div>
+                <h4>Name : <%= sess.name %> </h4>
+            </div>
+            
+            <div>
+                <h4>UserName : <%= sess.user %> </h4>
+            </div>
+
+            <div>
+                <h4>Email : <%= sess.email %> </h4>
+            </div>
+
+            <div>
+                <h4>Phone  : <%= sess.phn %> </h4>
+            </div>
+            
+            </div>
+
+        <div class="container jumbotron">
+            <div class="row"> <h2><u>Your Products </u></h2> </div>
+            <div class="row">
+            <% for (let product of useraddedproducts){ %>
+                
+                <div class="col-lg-4">
+                    <img class="thumbnail" style="image-orientation: inherit; object-fit: cover;" src="<%=product.image_url%>" alt = "image here">
+                    <div class="box-element product">
+                        <h6><strong> <%= product.p_name%> </strong></h6>
+                        <hr>
+        
+                        <% if(!sess.isLoggedIn){ %> 
+                            <a class="btn btn-outline-success" href="/login">View</a>
+                           <% } else{ %>
+                            <a class="btn btn-outline-success" href="/<%= product.p_id%>">View</a>
+                  <% } %>
+                        
+                        
+                        <h4 style="float: right;"><strong>Rs.<%= product.price %></strong></h4>
+        
+                    </div>
+                </div>
+                <% } %>
+            </div>
+            </div>
+
+            <% if(dispatchables.length>0){%>
+            <div class="container jumbotron">
+                <div class="row"> <h2><u>Dispatch Recieved Orders </u></h2> </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box-element">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                  <tr>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Product Name</th>
+                                   
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Address</th>
+                                  </tr>
+                                </thead>
+                                
+                            
+                            <% for (let disp of dispatchables){ %>
+                                <tbody>
+                                    <tr>
+                                      <th scope="row"><img src="<%=disp.image_url%>" style="width: 130px; height: 130; object-fit: cover;"></th>
+                                      <td><%=disp.p_name%></td>
+                                      
+                                      <td><%=disp.quantity%></td>
+                                      <td><%=disp.h_add%>, <%=disp.city%>, <%=disp.pincode%></td>
+                                    </tr>
+                                </tbody>
+                                
+                                
+                                <% } %>
+                               
+            
+                            </table>
+
+                            <form action="/profile" method="post">
+                                
+                                  <div class="form-group col-md-4">
+                                    <button type="submit"  data-action="add" class="btn btn-outline-secondary add-btn update-cart">Dispatch</button> 
+                                <input type="hidden" name="Success" value="Success">
+                                  </div>
+                                
+                            </form>
+                            
+                        
+            
+                        </div>
+            
+                        
+                    </div>
+                    
+                        
+                </div>
+            </div>
+            <% } %>
+
+            <div class="container jumbotron">
+                <div class="row"> <h2><u>Previous Orders </u></h2> </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box-element">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                  <tr>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
+                                  </tr>
+                                </thead>
+                                
+                            
+                            <% for (let order of orders){ %>
+                                <tbody>
+                                    <tr>
+                                      <th scope="row"><img src="<%=order.image_url%>" style="width: 130px; height: 130; object-fit: cover;"></th>
+                                      <td><%=order.p_name%></td>
+                                      <td><%=order.price%></td>
+                                      <td><%=order.quantity%></td>
+                                      <td><%=order.total%></td>
+                                    </tr>
+                                </tbody>
+                                
+                                
+                                <% } %>
+                               
+            
+                            </table>
+                            
+                        
+            
+                        </div>
+            
+                        
+                    </div>
+                    
+                        
+                </div>
+            </div>
+
+            <div class="container jumbotron">
+                <div class="row"> <h2><u>Pending Orders </u></h2> </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box-element">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                  <tr>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Product Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
+                                  </tr>
+                                </thead>
+                                
+                            <% var Final = 0%>
+                            <% for (let pending_order of pending_orders){ %>
+                                <tbody>
+                                    <tr>
+                                      <th scope="row"><img src="<%=pending_order.image_url%>" style="width: 130px; height: 130; object-fit: cover;"></th>
+                                      <td><%=pending_order.p_name%></td>
+                                      <td><%=pending_order.price%></td>
+                                      <td><%=pending_order.quantity%></td>
+                                      <td><%=pending_order.total%></td>
+                                    </tr>
+                                </tbody>
+                                
+                               
+                                <% } %>
+                                
+            
+                            </table>
+                            
+                        
+            
+                        </div>
+            
+                        
+                    </div>
+                    
+                        
+                </div>
+            </div>
+            <%- include('./partials/footer.ejs') %>
+    </body>
+</html>
