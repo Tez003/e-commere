@@ -1,4 +1,4 @@
-# e-commere
+# e-commere website
 e-commere website using Mysql, Nodejs, ExpressJs
 All the My sql tables and Views are in the data folder. The table.txt file contains all the details of the sql tables.
 In the middleware folder the password, database and schema all have to be changed as per your requirement.
